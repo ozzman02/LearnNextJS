@@ -4,32 +4,43 @@ import classes from './PostList.module.css';
 import NewPost from "./NewPost";
 import Modal from "./Modal";
 
-export default function PostList() {
+export default function PostList({ isPosting, onStopPosting }) {
 	
-	const [body, setBody] = useState("");
+	const [posts, setPosts] = useState([]);
 
-	const [author, setAuthor] = useState("");
-
-	function bodyChangeHandler(event) {
-		setBody(event.target.value);
+	function addPostHandler(postData) {
+		/* 
+			adding post at the beginning 
+			setPosts([postData, ...posts]);
+		*/
+		/* this is the correct method of updating state since it depends of previous snapshot */
+		setPosts((existingPosts) => [postData, ...existingPosts]);
 	}
 
-	function authorChangeHandler(event) {
-		setAuthor(event.target.value)
+	function renderModal() {
+		return (
+			<Modal onClose={onStopPosting}>
+				<NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
+			</Modal>
+		);
 	}
-
+	
 	return (
 		<Fragment>
-			<Modal>
-				<NewPost onBodyChange={bodyChangeHandler} onAuthorChange={authorChangeHandler} />
-			</Modal>
-			<ul className={classes.posts}>
-				<Post author={author} body={body} />
-				<Post author={author} body={body} />
-				<Post author={author} body={body} />
-				<Post author={author} body={body} />
-			</ul>
-		</Fragment>
-		
+			{isPosting && renderModal()}
+			{posts.length > 0 && (
+				<ul className={classes.posts}>
+					{posts.map((post) => 
+						<Post key={post.body} author={post.author} body={post.body} />
+					)}
+				</ul>
+			)}
+			{posts.length === 0 && (
+				<div style={{ textAlign: 'center', color: 'white' }}>
+					<h2>There are no posts yet.</h2>
+					<p>Start adding some!</p>
+				</div>
+			)}
+		</Fragment>	
 	);
 }
