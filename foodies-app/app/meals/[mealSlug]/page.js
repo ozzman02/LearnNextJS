@@ -31,6 +31,7 @@ export default function MealDetailsPage({ params }) {
 				</div>
 			</header>
 			<main>
+				{/* here there is a vulnerability to cross site scripting attacks */}
 				<p className={classes.instructions} dangerouslySetInnerHTML={{
 					__html: meal.instructions,
 				}}
