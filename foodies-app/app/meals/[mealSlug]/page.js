@@ -8,6 +8,8 @@ import { notFound } from 'next/navigation';
 
 export default function MealDetailsPage({ params }) {
 
+	const s3BucketUrl = 'https://ossant-nextjs-demo-users-image.s3.us-east-2.amazonaws.com';
+
 	const meal = getMeal(params.mealSlug);
 
 	if (!meal) {
@@ -20,7 +22,7 @@ export default function MealDetailsPage({ params }) {
 		<Fragment>
 			<header className={classes.header}>
 				<div className={classes.image}>
-					<Image src={meal.image} alt={meal.title} fill />
+					<Image src={`${s3BucketUrl}/${meal.image}`} alt={meal.title} fill />
 				</div>
 				<div className={classes.headerText}>
 					<h1>{meal.title}</h1>

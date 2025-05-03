@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.802.0",
     "better-sqlite3": "^11.9.1",
     "next": "15.3.1",
     "react": "^19.0.0",
