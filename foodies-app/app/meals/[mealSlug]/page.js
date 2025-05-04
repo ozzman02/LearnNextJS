@@ -6,6 +6,18 @@ import Image from 'next/image';
 import { getMeal } from '@/lib/meal';
 import { notFound } from 'next/navigation';
 
+/* Dynamic metadata */
+export async function generateMetadata({ params }) {
+	const meal = await getMeal(params.mealSlug);
+	if (!meal) {
+		notFound();
+	}
+	return {
+		title: meal.title,
+		description: meal.summary,
+	};
+}
+
 export default async function MealDetailsPage({ params }) {
 
 	const s3BucketUrl = 'https://ossant-nextjs-demo-users-image.s3.us-east-2.amazonaws.com';

@@ -13,7 +13,7 @@ async function getTemporaryCredentials() {
     });
 
     const response = await stsClient.send(command);
-    console.log("Temporary Credentials:", response.Credentials);
+    //console.log("Temporary Credentials:", response.Credentials);
     return response.Credentials;
 }
 
@@ -30,9 +30,6 @@ const s3 = new S3({
 });
 
 const db = sql('meals.db');
-
-//console.log(process.env.AWS_ACCESS_KEY_ID);
-//console.log(process.env.AWS_SECRET_ACCESS_KEY);
 
 export async function getMeals() {
 	await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -51,7 +48,7 @@ export async function saveMeal(meal) {
 		const instructions = xss(meal.instructions); --> Sanitizing code
 	*/
 
-	console.log('Saving meal')
+	//console.log('Saving meal')
 
 	meal.slug = slugify(meal.title, { lower: true });
 	meal.instructions = xss(meal.instructions);
@@ -70,7 +67,7 @@ export async function saveMeal(meal) {
 
 	meal.image = fileName;
 
-	console.log(fileName)
+	//console.log(fileName)
 
 	db.prepare(`
 		INSERT INTO meals (
