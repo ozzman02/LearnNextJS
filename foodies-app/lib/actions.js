@@ -21,7 +21,7 @@ export async function shareMeal(prevState, formData) {
 		creator_email: formData.get('email'),
 	}
 
-	//console.log(meal);
+	console.log(meal);
 
 	if (
 		isInvalidText(meal.title) ||

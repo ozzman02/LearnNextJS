@@ -6,15 +6,18 @@ import Image from 'next/image';
 import { getMeal } from '@/lib/meal';
 import { notFound } from 'next/navigation';
 
-export default function MealDetailsPage({ params }) {
+export default async function MealDetailsPage({ params }) {
 
 	const s3BucketUrl = 'https://ossant-nextjs-demo-users-image.s3.us-east-2.amazonaws.com';
 
-	const meal = getMeal(params.mealSlug);
+	const meal = await getMeal(params.mealSlug);
 
 	if (!meal) {
 		notFound();
 	}
+
+	console.log('Meal image:', meal.image);
+
 	
 	meal.instructions = meal.instructions.replace(/\n/g, '<br />');
 
