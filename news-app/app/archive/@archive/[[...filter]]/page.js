@@ -65,6 +65,15 @@ export default function FilteredNewsPage({ params }) {
 	}
 
 	/* 
+		The +selectedYear syntax is using the unary plus (+) operator, which converts selectedYear into a number.
+		Same thing for +selectedMonth.
+	*/
+	if ((selectedYear && !getAvailableNewsYears().includes(+selectedYear)) 
+		|| (selectedMonth && !getAvailableNewsMonths(selectedYear).includes(+selectedMonth))) {
+		throw new Error('Invalid filter');
+	}
+
+	/* 
 		This is good because we are returning a link
 
 			{links.map((link) => (
