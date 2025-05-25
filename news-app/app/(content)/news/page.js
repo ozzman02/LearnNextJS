@@ -5,7 +5,7 @@ import { Fragment } from "react";
 
 export default async function NewsPage() {
 
-	const news = getAllNews();
+	const news = await getAllNews();
 
 	return (
 		<Fragment>

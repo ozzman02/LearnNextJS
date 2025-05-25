@@ -9,9 +9,9 @@ import { Fragment } from "react";
 	If the default fallback content page is equivalent to the page.js then we can delete it. 
 	In this case we are deleting the previous page.js file under @latest folder.
 */
-export default function LatestNewsPage() {
+export default async function LatestNewsPage() {
 
-	const latestNews = getLatestNews();
+	const latestNews = await getLatestNews();
 
 	return (
 		<Fragment>

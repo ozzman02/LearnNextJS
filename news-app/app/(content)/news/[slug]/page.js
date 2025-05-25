@@ -1,12 +1,14 @@
-import { DUMMY_NEWS } from "@/dummy-news";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getNewsItem } from "@/lib/news";
 
-export default function NewsDetailPage({ params }) {
+export default async function NewsDetailPage({ params }) {
 
 	const newsSlug = params.slug;
 	
-	const newsItem = DUMMY_NEWS.find(newsItem => newsItem.slug === newsSlug);
+	//const newsItem = DUMMY_NEWS.find(newsItem => newsItem.slug === newsSlug);
+
+	const newsItem = await getNewsItem(newsSlug);
 
 	/* 
 		We have a not-found.js file to handle cases where newsItem is undefined but the system does not really understands when does that happen.
